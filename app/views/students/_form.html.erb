@@ -1,0 +1,93 @@
+<div class="panel panel-info">
+ <div class="panel-heading">
+   <h2 align="center"> Student-Registration</h2>
+ </div>  
+<div class="panel-body"> 
+<div class="container">
+<div class="container text-danger col-md-9">
+<%= form_for @student do |f| %>
+  <div class="form-group">
+    <%= f.label :Name ,class: "control-label" %>
+    <%= f.text_field :name,class: "form-control",id: "student_name",placeholder: 'enter name'%>
+  </div>
+  <div id="name"><!-- id for student name-->
+  </div>
+  <div class="form-group">
+    <%=f.label :Marks ,class:"control-label"%>
+    <%=f.text_field :marks ,class:"form-control", id:"marks" %><!--id used in validations-->
+  </div>
+  <div id="mark">
+  </div>
+  <div>
+  <%=f.label :Classroom ,class:"control-label"%>
+    <%= select("student", "classroom_id", @classrooms.collect {|c| [ c.name, c.id ] },{prompt: "select class"}, class: "form-control", id: "class") %>
+  </div>
+  <div id="col"></div>
+  
+  <div class="form-group">
+    <%=f.label :Year ,class:"control-label"%>
+    <%= f.select :year, options_for_select([['B.tech 1st year'],['B.tech 2nd year'],['B.tech 3rd year'],['B.tech 4th year']]),{prompt: "select year"}, class: "form-control", id:"year"  %>
+  </div>
+  <div id="yr"></div>
+
+  <div class="form-group">
+    <%= f.label :Course, class:"control-label"%>
+    <%= f.select :course, options_for_select([['C.S.E','C.S.E'],['E.C.E','E.C.E'],['E.E.E','E.E.E'],['Mech','Mech'],['Civil','Civil'],['BioMedical','BioMedical']]),{prompt: "select course"}, class: "form-control" ,id:"course" %>
+  </div>
+  <div id="branch"></div>
+  
+  <div>
+  <%= f.submit 'save',  class:"btn btn-primary", id:"button" %>
+  </div>
+  </div>
+  
+<!-- To display errors -->
+  <div>
+  <% if @student.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <%= pluralize(@student.errors.count, "error") %> Prohibited
+      <ul class="nav">
+      <% @student.errors.full_messages.each do |m| %>
+      <li><%= m %></li>
+      <% end %>
+      </ul> 
+    </div>
+  <% end %>
+  </div>
+<!--error messages ends -->
+<% end %>
+</div></div>
+<!-- client side validations -->
+<script>
+  $("#marks").blur(    
+    function(){ 
+      if($('#marks').val()<=0 || $('#marks').val() == "" || isNaN($('#marks').val()) )
+          document.getElementById("mark").innerHTML = "marks must have some value greate than 0";
+      else
+        document.getElementById("mark").innerHTML = ""; 
+      });
+  $("#student_name").blur(
+    function(){
+      if($('#student_name').val() == "")
+        document.getElementById("name").innerHTML = "name must have some data"; 
+      else
+        document.getElementById("name").innerHTML = ""; 
+    });
+  $("#year").blur(
+    function(){
+      if($('#year').val()=="")
+        document.getElementById("yr").innerHTML="select the option";
+      else
+        document.getElementById("yr").innerHTML=""
+    });
+  $("#course").blur(
+    function(){
+       alert("select course")});
+
+
+
+  
+
+</script>      
+
+  

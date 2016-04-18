@@ -1,0 +1,19 @@
+
+<div class="container">
+<h2>ListOfColleges</h2>
+<div class = "container col-md-12">
+<hr>
+<%= paginate @classrooms %>
+<hr> 
+<% @classrooms.each do |classroom| %>
+<p><b>ClassName: </b><%= classroom.name %><br></p>
+<p><b>Description: </b><%= classroom.description %><br></p>
+<p><b>StudentsCount: </b><%= classroom.no_of_students %><br></p>
+
+<p>
+	<%= link_to 'Edit', edit_classroom_path(classroom.id) %>
+	<%= link_to "Delete",classroom_path(classroom.id) ,method: :delete ,data:{confirm: "Are you sure to delete?"}%>
+</p>
+<hr>
+<% end %>
+</div>

@@ -1,0 +1,28 @@
+<h2 align="center">TotalStudents</h2>
+<div class="container">
+<table class="table  table-bordered">  
+<tr>
+  <th> Name</th>
+  <th>Marks </th>
+  <th> Year </th>
+  <th>Course</th>
+  <th> ClassRoom</th>
+  <th>action1</th>
+  <th> action2</th>
+</tr>  
+<%= paginate @students %>
+<% @students.each do |student| %>
+
+<tr class="info">
+  <th><%= student.name %></th>
+  <th><%= student.marks %></th>
+  <th><%= student.year %></th>
+  <th><%= student.course %></th>
+  <th><%= student.classroom.name%></th>
+  <th><%= link_to 'edit',edit_student_path(student.id) %></th>
+  <th><%= link_to "Delete",student_path(student.id) ,method: :delete ,data:{confirm: "Are you sure to delete?"}%></th>
+</tr>  
+<% end %>
+</table>
+</div>
+
